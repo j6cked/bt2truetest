@@ -16,7 +16,16 @@ spawn(function ()
             local plyr = game.Players.LocalPlayer;
             if plyr.Character then
              plyr.Character.HumanoidRootPart.CFrame = placeCFrame
+            else
+                local args = {
+                    [1] = {
+                        [1] = "Respawn"
+                    }
+                }
+                
+                game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
             end
+
         end
         teleportTo(remotePath)
         wait()
