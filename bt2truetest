@@ -1,0 +1,36 @@
+getgenv().Autofarm = true
+local remotePath = game:GetService("Workspace").Map["Training_Collisions"].BodyToughness["AFK_BT_2"].CFrame
+
+spawn(function ()
+    while getgenv().Autofarm == true do
+        function getCurrentPlayerPOS()
+            local plyr = game.Players.LocalPlayer;
+            if plyr.Character then
+            return plyr.Character.HumanoidRootPart.Position;
+            end
+               return false;
+        
+        end
+        
+        function teleportTo(placeCFrame)
+            local plyr = game.Players.LocalPlayer;
+            if plyr.Character then
+             plyr.Character.HumanoidRootPart.CFrame = placeCFrame
+            end
+        end
+        teleportTo(remotePath)
+        wait()
+    end
+end)
+
+spawn(function ()
+
+local args = {
+    [1] = {
+        [1] = "Respawn"
+    }
+}
+
+game:GetService("ReplicatedStorage").RemoteEvent:FireServer(unpack(args))
+
+end)
